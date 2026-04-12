@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN - IT HOÀNG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #050505; color: #FFD700; font-family: sans-serif; }
+        .glass-admin { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; border-radius: 20px; }
+        .table-dark { --bs-table-bg: transparent; }
+        .btn-premium { background: linear-gradient(45deg, #FF1493, #FFD700); border: none; color: #000; font-weight: bold; }
+    </style>
+</head>
+<body class="p-4">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-black italic">IT HOÀNG ADMIN</h2>
+            <span class="badge bg-danger p-2">SỰ KIỆN HỆ THỐNG</span>
+        </div>
+
+        <div class="glass-admin p-4 shadow-lg">
+            <table class="table table-dark table-hover align-middle">
+                <thead>
+                    <tr class="text-secondary small uppercase">
+                        <th>Khách hàng</th>
+                        <th>Trạng thái</th>
+                        <th>Pin</th>
+                        <th>Hạn dùng</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-table">
+                    <tr>
+                        <td><span class="text-white fw-bold">Khách HP-001</span></td>
+                        <td><span class="text-success small">● Online</span></td>
+                        <td class="text-info">85%</td>
+                        <td>Còn 3 ngày</td>
+                        <td>
+                            <button onclick="giaHan('HP-001', 30)" class="btn btn-sm btn-premium"> +30 Ngày </button>
+                            <button class="btn btn-sm btn-outline-danger"> Khóa </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, doc, updateDoc, Timestamp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDN9VahdRQfPvBAJDLPhLHMBrEPXZtEOFo",
+            authDomain: "mdm-cloud-a05e2.firebaseapp.com",
+            projectId: "mdm-cloud-a05e2",
+            storageBucket: "mdm-cloud-a05e2.firebasestorage.app",
+            messagingSenderId: "53911904103",
+            appId: "1:53911904103:web:2c7e4c2575369ea9af99c2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Hàm gia hạn ngày dùng (Cộng thêm 30 ngày từ thời điểm hiện tại)
+        window.giaHan = async (id, days) => {
+            const userRef = doc(db, "users", id);
+            const newExpiry = new Date();
+            newExpiry.setDate(newExpiry.getDate() + days);
+            
+            await updateDoc(userRef, {
+                ngay_het_han: Timestamp.fromDate(newExpiry),
+                status: "Premium"
+            });
+            alert("Đã gia hạn thành công cho " + id);
+        };
+    </script>
+</body>
+</html>
